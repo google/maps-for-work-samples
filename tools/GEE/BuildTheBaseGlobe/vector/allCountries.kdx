@@ -1,0 +1,84 @@
+Layout {
+FileType : "delimited"
+Delimiter : "	"
+Latitude : "4"
+Longitude : "5"
+FieldDefinitions {
+0 {
+Name : "geonameid"
+Type : "int"
+}
+1 {
+Name : "name"
+Type : "string"
+}
+2 {
+Name : "asciiname"
+Type : "string"
+}
+3 {
+Name : "alternatenames"
+Type : "string"
+}
+4 {
+Name : "latitude"
+Type : "float"
+}
+5 {
+Name : "longitude"
+Type : "float"
+}
+6 {
+Name : "feature class"
+Type : "string"
+}
+7 {
+Name : "feature code"
+Type : "string"
+}
+8 {
+Name : "country code"
+Type : "string"
+}
+9 {
+Name : "cc2"
+Type : "string"
+}
+10 {
+Name : "admin1 code"
+Type : "string"
+}
+11 {
+Name : "admin2 code"
+Type : "string"
+}
+12 {
+Name : "admin3 code"
+Type : "string"
+}
+13 {
+Name : "admin4 code"
+Type : "string"
+}
+14 {
+Name : "population"
+Type : "int"
+}
+15 {
+Name : "elevation"
+Type : "int"
+}
+16 {
+Name : "gtopo30"
+Type : "int"
+}
+17 {
+Name : "timezone"
+Type : "string"
+}
+18 {
+Name : "modification date"
+Type : "string"
+}
+}
+}
