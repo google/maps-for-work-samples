@@ -27,7 +27,7 @@ Supports the following query parameters:
 * select
 * where
 
-All other query arameters are ignored.
+All other query parameters are ignored.
 """
 
 import json
@@ -45,6 +45,7 @@ import sqlparse
 
 # This is your CloudSQL instance
 _INSTANCE = 'project-wander-1:demo-sql'
+_GEOMETRY_FIELD = 'geometry'
 # This is the host to connect to in the dev server.
 # This can be the IP address of your CloudSQL server, if you want to test that.
 _MYSQL_HOST = '127.0.0.1'
@@ -57,10 +58,10 @@ app = flask.Flask(__name__)
 
 
 @app.route('/tables/<database>:<table>/features')
-def features_list(database, table):
+def do_features_list(database, table):
     """Handle the parsing of the request and return the geojson.
 
-    This routes all the API requests to the handler.
+    This routes all the /tables/... requests to the handler.
     See http://flask.pocoo.org/docs/0.10/api/#flask.Flask.route
 
     Args:
@@ -81,7 +82,6 @@ def features_list(database, table):
                             mimetype='application/json',
                             status=500)
 
-
     feature_collection = f.list(table, select, where,
                                 limit=limit, order_by=order_by)
     if 'error' in feature_collection:
@@ -91,6 +91,42 @@ def features_list(database, table):
     else:
         return flask.Response(
             response=geojson.dumps(feature_collection, sort_keys=True),
+            mimetype='application/json',
+            status=200)
+
+
+@app.route('/pip/<database>:<table>')
+def do_pip(database, table):
+    """Handle the parsing of the point in polygon request and return a polygon.
+
+    This routes all the /pip/... requests to the handler.
+    See http://flask.pocoo.org/docs/0.10/api/#flask.Flask.route
+
+    Args:
+      database: The name of the database to use, this is picked from the URL.
+      table: The database table to query from, this is picked from the URL.
+    Returns:
+      A flask.Response object with the GeoJSON to be returned, or an error JSON.
+    """
+    lat = float(flask.request.args.get('lat', default=0.0))
+    lng = float(flask.request.args.get('lng', default=0.0))
+    select = flask.request.args.get('select', default='')
+    try:
+      pip = PointInPolygon(_INSTANCE, database, table)
+    except MySQLdb.OperationalError as e:
+      error = {'error': 'Database Error %s' % str(e)}
+      return flask.Response(response=json.dumps(error),
+                            mimetype='application/json',
+                            status=500)
+
+    polygon = pip.pip(lat, lng, select)
+    if 'error' in polygon:
+        return flask.Response(response=json.dumps(polygon),
+                              mimetype='application/json',
+                              status=500)
+    else:
+        return flask.Response(
+            response=geojson.dumps(polygon, sort_keys=True),
             mimetype='application/json',
             status=200)
 
@@ -114,7 +150,13 @@ class Features(object):
     """
 
     def __init__(self, instance, database):
-        """Set up a database connection to the cloud SQL server."""
+        """Set up a database connection to the cloud SQL server.
+
+
+        Args:
+          instance: The name of the CloudSQL instance.
+          database: The name of the database to use.
+        """
         # Keep track of the db instance.
         self._instance = instance
         # The name of the database to use.
@@ -158,9 +200,9 @@ class Features(object):
         # Add the geometry column to the query. This assumes that geometry is
         # not in the selected columns.
         if select:
-            select = '%s,AsWKT(geometry) as wktgeom' % select
+            select = '%s,AsWKT(%s) as wktgeom' % (select, _GEOMETRY_FIELD)
         else:
-            select = 'AsWKT(geometry) as wktgeom'
+            select = 'AsWKT(%s) as wktgeom' % _GEOMETRY_FIELD
 
         # Build the query.
         query = ['select %(select)s from %(id)s where %(where)s' % {
@@ -172,7 +214,6 @@ class Features(object):
             query.append('order by %s' % order_by)
         if limit:
             query.append('limit %s' % limit)
-
 
         # Convert the list to a string.
         query_string = ' '.join(query)
@@ -207,3 +248,41 @@ class Features(object):
         cursor.close()
         # Return the list of features as a FeatureCollection.
         return geojson.FeatureCollection(features)
+
+
+class PointInPolygon(object):
+    """This class handles the pip requests.
+
+    It uses Features to query the db.
+    """
+
+    def __init__(self, instance, database, table):
+        """
+        Create a Features instance and store the table.
+
+        Args:
+          instance: The name of the CloudSQL instance.
+          database: The name of the database to use.
+          table: The table that contains the features that we want to look up.
+        """
+        self._features = Features(instance, database)
+        self._table = table
+
+    def pip(self, lat, lng, fields):
+        """This method returns the polygon that contains the given coordinate.
+
+        It uses the Feature class to make the actual query.
+
+        Args:
+          lat: The latitude
+          lng: The longitude
+          fields: The fields to select as data
+
+        Returns:
+          A geojson polygon or an error dict.
+        """
+        point = "GeomFromText('POINT(%f %f)')" % (lng, lat)
+        return self._features.list(
+            self._table, fields,
+            'ST_CONTAINS(%s,%s)' % (_GEOMETRY_FIELD, point),
+            limit=1)
