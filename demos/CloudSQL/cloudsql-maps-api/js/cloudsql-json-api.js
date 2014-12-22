@@ -1,9 +1,12 @@
 // Create a namespace
 var google = google || {};
-google.cloudsql = google.cloidsql || {};
+/**
+ * Namespace for the cloudsql library.
+ */
+google.cloudsql = google.cloudsql || {};
 
 /**
- * A helper class to simply calling a CloudSQL REST API.
+ * A helper class to simplify calling a CloudSQL REST API.
  * @param {string} database The name of the database to use.
  * @constructor
  */
@@ -21,13 +24,15 @@ google.cloudsql.CloudSqlJsonApi = function(database) {
  * @param {{function(Object)}} callback This function is called when the server
  *     responds, and given the response.
  */
-google.cloudsql.CloudSqlJsonApi.prototype.FeaturesList = function(
+google.cloudsql.CloudSqlJsonApi.prototype.featuresList = function(
     table, args, callback) {
-  var encoded_args = $.param(args);
+  var encodedArgs = $.param(args);
   this.FeaturesCallbacks.add(callback);
-  var self = this;
-  var url = '/tables/' + this.database + ':' + table + '/features?' +
+  var encodedIdentifier = encodeURIComponent(this.database) + ':' +
+      encodeURIComponent(table);
+  var url = '/tables/' + encodedIdentifier + '/features?' +
       encoded_args;
+  var self = this;
   $.getJSON(url, function(response) {
     self.featuresCallbacks.fire(response);
     self.featuresCallbacks.remove(callback);
@@ -45,17 +50,19 @@ google.cloudsql.CloudSqlJsonApi.prototype.FeaturesList = function(
  * @param {{function(Object)}} callback This function is called when the server
  *     responds, and given the response.
  */
-google.cloudsql.CloudSqlJsonApi.prototype.PiP = function(
+google.cloudsql.CloudSqlJsonApi.prototype.pointInPolygon = function(
     table, select, location, callback) {
   var args = {
     lat: location.lat(),
     lng: location.lng(),
     select: select
   };
-  var encoded_args = $.param(args);
+  var encodedArgs = $.param(args);
   this.pipCallbacks.add(callback);
+  var encodedIdentifier = encodeURIComponent(this.database) + ':' +
+      encodeURIComponent(table);
+  var url = '/pip/' + encodedIdentifier + '?' + encodedArgs;
   var self = this;
-  var url = '/pip/' + this.database + ':' + table + '?' + encoded_args;
   $.getJSON(url, function(response) {
     self.pipCallbacks.fire(response);
     self.pipCallbacks.remove(callback);

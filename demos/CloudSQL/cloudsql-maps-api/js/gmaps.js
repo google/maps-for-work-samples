@@ -4,8 +4,11 @@ var infowindow = new google.maps.InfoWindow();
 var latlng = null;
 var activePolygons = [];
 // This helper library makes it easy to call the AppEngine application
-var pip = new google.cloudsql.CloudSqlJsonApi('nyc');
+var cloudSqlApi = new google.cloudsql.CloudSqlJsonApi('nyc');
 
+/**
+ * Initializes the map and sets up a click handler that will call CLoudSQL.
+ */
 function initialize() {
   var mapOptions = {
     center: { lat: 40.68, lng: -74.0273},
@@ -23,7 +26,8 @@ function initialize() {
     var lng = latlng.lng();
 
     // Get the polygon that contains the clicked point.
-    pip.PiP('nyczones', 'borough,zone', latlng, function(geojson) {
+    cloudSqlApi.pointInPolygon('nyczones', 'borough,zone',
+                               latlng, function(geojson) {
       if (geojson.features.length == 0) {
         alert('Point is not in Polygon in CloudSQL Database');
         return;
@@ -33,10 +37,7 @@ function initialize() {
       });
 
       var features = map.data.addGeoJson(geojson);
-      map.data.setStyle({
-        clickable: true
-      });
-      map.data.addListener('click', HandlePolygonClick);
+      map.data.addListener('click', handlePolygonClick);
 
       activePolygons = [];
       for (i in features) {
@@ -78,15 +79,16 @@ function placeMarker(location) {
  * Open an infowindow on the clicked polygon, on the marker.
  * @param {google.maps.Data.MouseEvent} event The click event.
  */
-function HandlePolygonClick(event) {
+function handlePolygonClick(event) {
   console.log('polygon was clicked');
-  var content = '<p>' +
-      '<strong>Properties</strong><br />';
+  var content = $('<p>');
+  $('<strong>').text('Properties').appendTo(content);
+  content.append('<br>');
   event.feature.forEachProperty(function(v, k) {
-    content += '<b>' + k + '</b>: ' + v + '<br />';
+    content.append('<strong>' + k + '</strong>: ' + v).append('<br>');
   });
-  content += '</p>';
-  infowindow.setContent(content);
+
+  infowindow.setContent(content.html());
   infowindow.setPosition(latlng);
   infowindow.open(map);
 }
