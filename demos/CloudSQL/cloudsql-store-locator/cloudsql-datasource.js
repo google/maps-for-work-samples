@@ -57,6 +57,14 @@ storeLocator.CloudSqlDataFeed = function(opts) {
 };
 storeLocator['CloudSqlDataFeed'] = storeLocator.CloudSqlDataFeed;
 
+/**
+ * Returns the stores inside the given bounds.
+ * @param {google.maps.LatLngBounds} bounds
+ * @param {storeLocator.FeatureSet} features the features to filter on.
+ * Unused
+ * @param {function(Array.<!storeLocator.Store>)} callback the callback
+ * function.
+ */
 storeLocator.CloudSqlDataFeed.prototype.getStores = function(
     bounds, features, callback) {
   // TODO: use features.
