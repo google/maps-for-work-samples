@@ -26,7 +26,7 @@ function initialize() {
     var lng = latlng.lng();
 
     // Get the polygon that contains the clicked point.
-    cloudSqlApi.pointInPolygon('nyczones', 'borough,zone',
+    cloudSqlApi.pointInPolygon('nyczones', 'zone',
                                latlng, function(geojson) {
       if (geojson.features.length == 0) {
         alert('Point is not in Polygon in CloudSQL Database');
