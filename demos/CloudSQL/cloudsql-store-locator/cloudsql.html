@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Store locator with Panel</title>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+    <script
+      src="https://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js">
+    </script>
+    <script src="js/store-locator.min.js"></script>
+    <script src="js/cloudsql-datasource.js"></script>
+    <script src="js/cloudsql.js"></script>
+    <link rel="stylesheet" href="css/storelocator.css">
+    <style>
+      body { font-family: sans-serif; }
+      #map-canvas, #panel { height: 500px; }
+      #panel { width: 300px; float: left; margin-right: 10px; }
+      p.attribution, p.attribution a { color: #666; }
+    </style>
+    <script>
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-12846745-20']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' === document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </head>
+  <body>
+    <h1>Medicare offices</h1>
+    <div id="panel"></div>
+    <div id="map-canvas"></div>
+    <p class="attribution">Medicare location data from <a href="http://data.gov.au/66">data.gov.au</a>, licensed under <a href="http://creativecommons.org/licenses/by/2.5/au/">CC-BY 2.5</a></p>
+  </body>
+</html>
