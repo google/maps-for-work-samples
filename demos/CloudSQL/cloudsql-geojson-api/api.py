@@ -36,11 +36,11 @@ import os
 import traceback
 import MySQLdb
 
-# flask, jeojson and geomet are external dependencies.
+# flask, geojson,geomet and sqlparse are external dependencies.
 # Install them by running pip install -r requirements.txt -t lib
 import flask
 import geojson
-from geomet import wkt
+import geomet.wkt
 import sqlparse
 
 # This is your CloudSQL instance
@@ -235,9 +235,9 @@ class Features(object):
         for row in rows:
             wktgeom = row[-1]
             props = dict(zip(cols[:-1], row[:-1]))
-            # wkt.loads returns a dict which corresponds to the geometry
+            # geomet.wkt.loads returns a dict which corresponds to the geometry
             # We dump this as a string, and let geojson parse it
-            geom = geojson.loads(json.dumps(wkt.loads(wktgeom)))
+            geom = geojson.loads(json.dumps(geomet.wkt.loads(wktgeom)))
             # Turn the geojson geometry into a proper GeoJSON feature
             feature = geojson.Feature(geometry=geom, properties=props,
                                       id=feature_id)
@@ -257,8 +257,7 @@ class PointInPolygon(object):
     """
 
     def __init__(self, instance, database, table):
-        """
-        Create a Features instance and store the table.
+        """Create a Features instance and store the table.
 
         Args:
           instance: The name of the CloudSQL instance.
