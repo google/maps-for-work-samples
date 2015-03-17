@@ -40,6 +40,7 @@ import MySQLdb
 # Install them by running pip install -r requirements.txt -t lib
 import flask
 import geojson
+import geomet.wkb
 import geomet.wkt
 import sqlparse
 
@@ -223,7 +224,7 @@ class Features(object):
         rows = []
         try:
             cursor.execute(' '.join(query))
-            cols = [i[0] for i in cursor.description]
+            cols = [(i[0],i[1]) for i in cursor.description]
             rows = cursor.fetchall()
         except MySQLdb.Error as e:
             # This error should probably be made better in a production system.
@@ -234,7 +235,24 @@ class Features(object):
         # now we read the rows and generate geojson out of them.
         for row in rows:
             wktgeom = row[-1]
-            props = dict(zip(cols[:-1], row[:-1]))
+            props = {}
+            for i in range(len(row)-1):
+                if row[i] is None:
+                    logging.debug('skipping NULL value for column %s ',
+                                 cols[i][0])
+                elif cols[i][1] == 246:
+                    logging.debug('%s = %d', cols[i][0], row[i])
+                    props[cols[i][0]] = int(row[i])
+                elif cols[i][1] == 255:
+                    logging.debug('SKIPPING GEOMETRY DATA')
+                elif cols[i][1] > 200:
+                    logging.debug('stringifying data of type %d: %s=%s',
+                                 cols[i][1], cols[i][0], row[i])
+                    props[cols[i][0]] = str(row[i])
+                else:
+                    logging.debug('%s = %s', cols[i][0], row[i])
+                    props[cols[i][0]] = row[i]
+            #props = dict(zip(cols[:-1], row[:-1]))
             # geomet.wkt.loads returns a dict which corresponds to the geometry
             # We dump this as a string, and let geojson parse it
             geom = geojson.loads(json.dumps(geomet.wkt.loads(wktgeom)))
