@@ -83,7 +83,8 @@
                         + westLng + "," + northLat + "," //left top
                         + eastLng + "," + southLat + "," //right bottom
                         + map.getZoom()
-                        + "&cluster=yes&format=json";
+                        + "&cluster=yes&format=json"
+                        + "APPID:" + YOUR_OPENWEATHERMAP_KEY;
     request = new XMLHttpRequest();
     request.onload = proccessResults;
     request.open("get", requestString, true);
