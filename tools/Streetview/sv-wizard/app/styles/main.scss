@@ -1,0 +1,110 @@
+// bower:scss
+// endbower
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  background: #fafafa;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  color: #333;
+  width: 100%;
+  height: 100%;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+}
+paper-header-panel{
+  box-shadow: 0px 0px 4px grey;
+  z-index: 1;
+}
+
+.paper-header {
+  height: 60px;
+  font-size: 16px;
+  line-height: 60px;
+  padding: 0 10px;
+  color: white;
+  transition: height 0.2s;
+
+}
+.content {
+  height: 100%;
+  padding: 20px 15px;
+}
+.cover {
+  margin: 60px;
+}
+
+
+.configuration .section {
+  padding-top: 5px;
+  padding-left: 5px;
+
+}
+.configuration .section .form {
+  padding-left: 5px;
+  font-size: 12px;
+}
+.sv-parameters {
+  min-width: 400px;
+}
+
+.configuration .section h5 {
+  font-weight: normal;
+  font-size: 14px;
+  color: #444;
+}
+
+.menu {
+
+  .menu-section {
+    margin-bottom: 20px;
+    h4 {
+      color: #666;
+    }
+    .menu-section-content {
+      margin-left: 20px;
+      color: #777;
+      h5 {
+        margin-top: 10px;
+        margin-left: -10px;
+        font-weight: bold;
+        color: #777;
+      }
+      ul {
+        margin-top: 10px;
+        margin-left: 10px;
+        li {
+          margin: 5px;
+          list-style: none;
+          font-size: 14px;
+          cursor: pointer;
+
+          &:hover {
+            color: #555;
+          }
+        }
+      }
+    }
+  }
+}
+
+paper-toolbar {
+
+  paper-fab.floating {
+    position: absolute;
+    top: calc(64px - 28px);
+    right: 24px;
+    z-index: 1;
+    transition: top 0.18s ease-in;
+  }
+}

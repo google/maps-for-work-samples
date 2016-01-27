@@ -1,0 +1,97 @@
+<paper-header-panel mode="standard" class="sv-parameters">
+    <paper-toolbar>
+  <paper-icon-button icon="menu" class="paper-header" ng-click="openMenu()"></paper-icon-button>
+  <div class="title">Street View Wizard</div>
+  <paper-fab id="create_button" icon="add" class="floating" ng-click="new()"></paper-fab>
+</paper-toolbar>
+  <div class="content fit layout vertical justified">
+    <div class="configuration">
+      <div class="section">
+        <h4>Name</h4>
+        <div class="form">
+          <paper-input-container no-label-float="true" class="flex">
+            <input is="iron-input" ng-model="request.name"></input>
+          </paper-input-container>
+        </div>
+      </div>
+      <div class="section">
+        <h4>Parameters</h4>
+          <div class="form">
+            <div class="layout horizontal">
+              <paper-input-container always-float-label="true" class="small">
+                <label>width:</label>
+                <input is="iron-input" type="number" ng-model="request.size.width">
+                 <div suffix>px</div>
+              </paper-input-container>
+
+              <paper-input-container always-float-label="true" class="small">
+                <label>height:</label>
+                <input is="iron-input" type="number" ng-model="request.size.height">
+                 <div suffix>px</div>
+              </paper-input-container>
+            </div>
+          <div class="layout horizontal">
+            <paper-input-container always-float-label="true" class="small">
+              <label>latitude:</label>
+              <input is="iron-input" type="number" step="0.01" disabled="true" ng-model="request.location.lat">
+            </paper-input-container>
+            <paper-input-container always-float-label="true"class="small">
+              <label>longitude:</label>
+              <input is="iron-input" type="number" step="0.01" disabled="true" ng-model="request.location.lng">
+            </paper-input-container>
+          </div>
+            <div class="layout horizontal">
+              <paper-input-container always-float-label="true" class="small">
+                <label>heading:</label>
+                <input is="iron-input" type="number" min="0" max="360"
+                  step="0.5" ng-model="request.heading">
+              </paper-input-container>
+            </div>
+            <div class="layout horizontal">
+              <paper-input-container always-float-label="true" class="small">
+                <label>pitch:</label>
+                <input is="iron-input" type="number" min="-90" max="90"
+                  step="0.5" ng-model="request.pitch">
+              </paper-input-container>
+            </div>
+            <div class="layout horizontal">
+              <paper-input-container always-float-label="true" class="small">
+                <label>fov:</label>
+                <input is="iron-input" type="number" max="120" min="5.6"
+                  step="0.5" ng-model="request.fov">
+              </paper-input-container>
+            </div>
+          </div>
+      </div>
+      <div class="section">
+        <h4>Authentication</h4>
+          <div class="form ">
+            <paper-radio-group ng-model="request.authenticationMode" class="layout vertical">
+              <paper-radio-button name="{{AuthenticationMode.NONE}}">None</paper-radio-button>
+              <paper-radio-button name="{{AuthenticationMode.API_KEY}}">API key</paper-radio-button>
+              <paper-radio-button name="{{AuthenticationMode.FOR_WORK}}">Maps for Work</paper-radio-button>
+            </paper-radio-group>
+          </div>
+      </div>
+    </div>
+
+    <!-- Action footer -->
+    <div class="layout horizontal justified">
+      <paper-button class="save" raised ng-click="save()">Save</paper-button>
+      <paper-button class="generate" ng-click="generate()" raised>Generate</paper-button>
+    </div>
+    </div>
+
+ </paper-header-panel>
+ 
+  <div class="sv-preview-container layout horizontal vertical center center-justified" style="width:100%;height:100%">
+   <sv-preview style="width:100%;height:100%" class="sv-preview-panorama"
+    panorama="panorama"
+    location="request.location"
+    fov="request.fov"
+    heading="request.heading"
+    pitch="request.pitch"
+    ratio="getRatio()"></sv-preview>
+    <map-preview class="map-preview" panorama="panorama"></map-preview>
+      <input placeholder="Search" class="address-search" autocomplete="addressSelected(address)"></input>
+  </div>
