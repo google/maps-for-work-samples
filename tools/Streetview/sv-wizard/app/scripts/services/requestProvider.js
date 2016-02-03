@@ -3,14 +3,12 @@ var angular = angular || {};
 
 var svWizardApp = angular.module('svWizardApp');
 
-svWizardApp.service('RequestProvider', ['localStorageService', 'M',
-    function(localStorageService, M) {
+svWizardApp.service('RequestProvider', ['localStorageService',
+    function(localStorageService) {
     var REQUESTS = 'requests';
-    var CURRENT = 'current';
 
     var requests_ = {};
     var requestsArray_ = []
-    var current_ = {};
 
     init_();
 
@@ -31,24 +29,6 @@ svWizardApp.service('RequestProvider', ['localStorageService', 'M',
       get: function(){return requestsArray_}
     });
     
-    //TODO: Move to State service
-    
-    Object.defineProperty(this, 'current', {
-      get: function(){
-        if(angular.isUndefined(current_.size) ||
-        angular.isUndefined(current_.location) ||
-        angular.isUndefined(current_.heading) ||
-        angular.isUndefined(current_.fov) ||
-        angular.isUndefined(current_.pitch)) {
-          return null;
-        }
-        return current_;
-      },
-      set: function(request){
-        current_ = request;
-        saveCurrentRequest_();
-      }
-    });
 
     this.removeRequest = function(timestamp) {
       delete requests_[timestamp];
@@ -58,20 +38,7 @@ svWizardApp.service('RequestProvider', ['localStorageService', 'M',
     }
     
     //Private
-    
-    var defaultRequest_ = {
-      timestamp: null,
-      name: 'La Giralda - Sevilla',
-      location: {lat: 37.3863, lng: -5.99205},
-      size: {
-        width: 640,
-        height: 640
-      },
-      heading: 254.5,
-      fov: 71.6,
-      pitch: 30.8,
-      authenticationMode: M.AuthenticationMode.NONE
-    };
+   
     
     /*Loads the requests from locastorage*/
     function init_() {
@@ -83,14 +50,6 @@ svWizardApp.service('RequestProvider', ['localStorageService', 'M',
         requests_ = {};
       }
       updateArray_();
-
-      var rawCurrent = localStorageService.get(CURRENT);
-      if(angular.isDefined(rawCurrent) && rawCurrent !== null &&
-        rawCurrent.length > 0) {
-        current_ = angular.fromJson(rawCurrent);
-      }else{
-        current_ = {};
-      }
     }
 
     function updateArray_() {
@@ -104,11 +63,6 @@ svWizardApp.service('RequestProvider', ['localStorageService', 'M',
     function saveRequests_() {
       var requestsJson = angular.toJson(requests_);
       localStorageService.set(REQUESTS, requestsJson);
-    }
-    
-    function saveCurrentRequest_(){
-      var currentJson = angular.toJson(current_);
-      localStorageService.set(CURRENT, currentJson);
     }
     
     }

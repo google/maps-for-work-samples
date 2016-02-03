@@ -151,11 +151,12 @@
     <![endif]-->
     <paper-drawer-panel force-narrow="true" ng-app="svWizardApp" id="drawer">
       <!-- Settings menu -->
-      <div drawer ng-include="'templates/menu.html'" ng-controller="MenuCtrl">
+      <div drawer ng-include="'templates/menu.html'"
+        ng-controller="MenuCtrl as menu">
       </div>
       <!-- RequestView -->
       <div main class="layout horizontal" ng-include="'templates/main.html'"
-        ng-controller="StreetViewRequestCtrl">
+        ng-controller="MainCtrl as main">
 
     </div>
     </paper-drawer-panel>
@@ -169,7 +170,9 @@
           <script src="scripts/services/models.js"></script>
           <script src="scripts/services/settings.js"></script>
           <script src="scripts/services/requestProvider.js"></script>
-          <script src="scripts/controllers/streetViewRequestCtrl.js"></script>
+          <script src="scripts/services/state.js"></script>
+          <script src="scripts/services/menu.js"></script>
+          <script src="scripts/controllers/mainCtrl.js"></script>
           <script src="scripts/controllers/generatedDialogCtrl.js"></script>
           <script src="scripts/controllers/menuCtrl.js"></script>
           <script src="scripts/directives/svPreview.js"></script>

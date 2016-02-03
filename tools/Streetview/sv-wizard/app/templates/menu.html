@@ -14,15 +14,15 @@
         <h5>Authentication</h5>
         <paper-input-container always-float-label="true" class="small">
           <label>API key:</label>
-          <input is="iron-input" ng-model="settings.apiKey">
+          <input is="iron-input" ng-model="menu.settings.apiKey">
         </paper-input-container>
         <paper-input-container always-float-label="true" class="small">
           <label>Client id:</label>
-          <input is="iron-input" ng-model="settings.clientId">
+          <input is="iron-input" ng-model="menu.settings.clientId">
         </paper-input-container>
         <paper-input-container always-float-label="true" class="small">
           <label>Crypto key:</label>
-          <input is="iron-input" ng-model="settings.cryptoKey">
+          <input is="iron-input" ng-model="menu.settings.cryptoKey">
         </paper-input-container>
       </div>
     </div>
@@ -30,10 +30,10 @@
     <div class="menu-section">
       <h4><iron-icon icon="folder"></iron-icon> Saved</h4>
       <div class="menu-section-content">
-        <h5 ng-if="provider.requests.length == 0">No saved requests!</h5>
-        <ul ng-if="provider.requests.length > 0">
-          <li ng-repeat="request in provider.requests | filter: search | orderBy: 'timestamp':true"
-            ng-click="openRequest(request)">
+        <h5 ng-if="menu.provider.requests.length == 0">No saved requests!</h5>
+        <ul ng-if="menu.provider.requests.length > 0">
+          <li ng-repeat="request in menu.provider.requests | filter: search | orderBy: 'timestamp':true"
+            ng-click="menu.openRequest(request)">
             {{request.name}}
           </li>
         </ul>
