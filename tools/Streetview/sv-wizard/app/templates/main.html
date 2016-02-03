@@ -9,56 +9,67 @@
       <div class="section">
         <h4>Name</h4>
         <div class="form">
-          <paper-input-container no-label-float="true" class="flex">
-            <input is="iron-input" ng-model="request.name"></input>
-          </paper-input-container>
+          <paper-input no-label-float="true" class="flex small" ng-model="provider.current.name">
+          </paper-input>
         </div>
       </div>
+      
       <div class="section">
-        <h4>Parameters</h4>
+        <h4>Location</h4>
+        <div class="form">
+          <paper-input-container no-label-float="true" class="flex small">
+            <input is="iron-input" map-autocomplete="addressSelected(address)"></input>
+          </paper-input-container>
+          
+          <map-preview class="map-preview flex" panorama="panorama"></map-preview >
+        </div>
+      </div>
+      
+      <div class="section">
+        <h4>Request Parameters</h4>
           <div class="form">
             <div class="layout horizontal">
               <paper-input-container always-float-label="true" class="small">
                 <label>width:</label>
-                <input is="iron-input" type="number" ng-model="request.size.width">
+                <input is="iron-input" type="number" ng-model="provider.current.size.width">
                  <div suffix>px</div>
               </paper-input-container>
 
               <paper-input-container always-float-label="true" class="small">
                 <label>height:</label>
-                <input is="iron-input" type="number" ng-model="request.size.height">
+                <input is="iron-input" type="number" ng-model="provider.current.size.height">
                  <div suffix>px</div>
               </paper-input-container>
             </div>
           <div class="layout horizontal">
             <paper-input-container always-float-label="true" class="small">
               <label>latitude:</label>
-              <input is="iron-input" type="number" step="0.01" disabled="true" ng-model="request.location.lat">
+              <input is="iron-input" type="number" step="0.01" disabled="true" ng-model="provider.current.location.lat">
             </paper-input-container>
             <paper-input-container always-float-label="true"class="small">
               <label>longitude:</label>
-              <input is="iron-input" type="number" step="0.01" disabled="true" ng-model="request.location.lng">
+              <input is="iron-input" type="number" step="0.01" disabled="true" ng-model="provider.current.location.lng">
             </paper-input-container>
           </div>
             <div class="layout horizontal">
               <paper-input-container always-float-label="true" class="small">
                 <label>heading:</label>
                 <input is="iron-input" type="number" min="0" max="360"
-                  step="0.5" ng-model="request.heading">
+                  step="0.5" ng-model="provider.current.heading">
               </paper-input-container>
             </div>
             <div class="layout horizontal">
               <paper-input-container always-float-label="true" class="small">
                 <label>pitch:</label>
                 <input is="iron-input" type="number" min="-90" max="90"
-                  step="0.5" ng-model="request.pitch">
+                  step="0.5" ng-model="provider.current.pitch">
               </paper-input-container>
             </div>
             <div class="layout horizontal">
               <paper-input-container always-float-label="true" class="small">
                 <label>fov:</label>
                 <input is="iron-input" type="number" max="120" min="5.6"
-                  step="0.5" ng-model="request.fov">
+                  step="0.5" ng-model="provider.current.fov">
               </paper-input-container>
             </div>
           </div>
@@ -66,7 +77,7 @@
       <div class="section">
         <h4>Authentication</h4>
           <div class="form ">
-            <paper-radio-group ng-model="request.authenticationMode" class="layout vertical">
+            <paper-radio-group ng-model="provider.current.authenticationMode" class="layout vertical">
               <paper-radio-button name="{{AuthenticationMode.NONE}}">None</paper-radio-button>
               <paper-radio-button name="{{AuthenticationMode.API_KEY}}">API key</paper-radio-button>
               <paper-radio-button name="{{AuthenticationMode.FOR_WORK}}">Maps for Work</paper-radio-button>
@@ -85,13 +96,12 @@
  </paper-header-panel>
  
   <div class="sv-preview-container layout horizontal vertical center center-justified" style="width:100%;height:100%">
+  <!--<input placeholder="Search" class="address-search" autocomplete="addressSelected(address)"></input>-->
    <sv-preview style="width:100%;height:100%" class="sv-preview-panorama"
     panorama="panorama"
-    location="request.location"
-    fov="request.fov"
-    heading="request.heading"
-    pitch="request.pitch"
+    location="provider.current.location"
+    fov="provider.current.fov"
+    heading="provider.current.heading"
+    pitch="provider.current.pitch"
     ratio="getRatio()"></sv-preview>
-    <map-preview class="map-preview" panorama="panorama"></map-preview>
-      <input placeholder="Search" class="address-search" autocomplete="addressSelected(address)"></input>
   </div>

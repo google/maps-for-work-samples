@@ -1,12 +1,12 @@
 var svWizardApp = angular.module('svWizardApp');
 
 
-svWizardApp.directive( 'autocomplete', [ '$timeout', function($timeout) {
+svWizardApp.directive( 'mapAutocomplete', [ '$timeout', function($timeout) {
 
   return {
     restrict: 'A',
     scope: {
-      autocomplete: '&'
+      mapAutocomplete: '&'
     },
     link: function(scope, element, attrs) {
       var autocomplete = new google.maps.places.Autocomplete(element[0]);
@@ -14,7 +14,7 @@ svWizardApp.directive( 'autocomplete', [ '$timeout', function($timeout) {
       autocomplete.addListener('place_changed', function(){
         scope.$apply();
         $timeout(function() {
-          scope.autocomplete({address: autocomplete.getPlace()});
+          scope.mapAutocomplete({address: autocomplete.getPlace()});
         });
       });
     }

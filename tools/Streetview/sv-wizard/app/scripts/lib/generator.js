@@ -3,9 +3,9 @@ var svWizard = svWizard || {};
 svWizard.generator = {};
 svWizard.DOMAIN = 'https://maps.googleapis.com';
 svWizard.BASE_URL = '/maps/api/streetview';
+
 svWizard.generator.generate = function(request, settings) {
-    console.log(settings);
-    var parameter = 'https://maps.googleapis.com/maps/api/streetview?';
+    
     var parameters = {
         location: request.location.lat + ',' + request.location.lng,
         heading: request.heading,
@@ -15,7 +15,7 @@ svWizard.generator.generate = function(request, settings) {
     };
     var relativeUrl = svWizard.generator.
         addParameters(svWizard.BASE_URL, parameters);
-    var url = '';
+        
     if(request.authenticationMode == svWizard.AuthenticationMode.NONE) {
         return svWizard.DOMAIN + relativeUrl;
     }else if(request.authenticationMode == svWizard.AuthenticationMode.API_KEY){

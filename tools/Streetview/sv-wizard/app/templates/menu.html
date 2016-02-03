@@ -1,8 +1,8 @@
 <paper-header-panel mode="standard" class="drawer" drawer>
   <paper-toolbar class="paper-header">
-    <paper-input-container placeholder="Filter requests" 
+    <paper-input-container
       no-label-float="true">
-      <input is="iron-input" type="text" placeholder="Filter requests" ng-model="search"/>
+      <input is="iron-input" type="text" placeholder="Search" ng-model="search"/>
       <iron-icon suffix icon="search"></paper-icon-button>
     </paper-input>
   </paper-toolbar>
@@ -14,15 +14,15 @@
         <h5>Authentication</h5>
         <paper-input-container always-float-label="true" class="small">
           <label>API key:</label>
-          <input is="iron-input" ng-model="auth.apiKey">
+          <input is="iron-input" ng-model="settings.apiKey">
         </paper-input-container>
         <paper-input-container always-float-label="true" class="small">
           <label>Client id:</label>
-          <input is="iron-input" ng-model="auth.clientId">
+          <input is="iron-input" ng-model="settings.clientId">
         </paper-input-container>
         <paper-input-container always-float-label="true" class="small">
           <label>Crypto key:</label>
-          <input is="iron-input" ng-model="auth.cryptoKey">
+          <input is="iron-input" ng-model="settings.cryptoKey">
         </paper-input-container>
       </div>
     </div>
@@ -30,9 +30,9 @@
     <div class="menu-section">
       <h4><iron-icon icon="folder"></iron-icon> Saved</h4>
       <div class="menu-section-content">
-        <h5 ng-if="requests.length == 0">No saved requests!</h5>
-        <ul ng-if="requests.length > 0">
-          <li ng-repeat="request in requests | filter: search | orderBy: 'timestamp':true"
+        <h5 ng-if="provider.requests.length == 0">No saved requests!</h5>
+        <ul ng-if="provider.requests.length > 0">
+          <li ng-repeat="request in provider.requests | filter: search | orderBy: 'timestamp':true"
             ng-click="openRequest(request)">
             {{request.name}}
           </li>
