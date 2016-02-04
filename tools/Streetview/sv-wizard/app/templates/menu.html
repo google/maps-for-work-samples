@@ -2,7 +2,8 @@
   <paper-toolbar class="paper-header">
     <paper-input-container
       no-label-float="true">
-      <input is="iron-input" type="text" placeholder="Search" ng-model="search"/>
+      <input is="iron-input" type="text" placeholder="Search" 
+        ng-model="search"/>
       <iron-icon suffix icon="search"></paper-icon-button>
     </paper-input>
   </paper-toolbar>
@@ -32,13 +33,13 @@
       <div class="menu-section-content">
         <h5 ng-if="menu.provider.requests.length == 0">No saved requests!</h5>
         <ul ng-if="menu.provider.requests.length > 0">
-          <li ng-repeat="request in menu.provider.requests | filter: search | orderBy: 'timestamp':true"
-            ng-click="menu.openRequest(request)">
+          <li ng-click="menu.openRequest(request)" 
+            ng-repeat="request in menu.provider.requests 
+            | filter: search | orderBy: 'timestamp':true">
             {{request.name}}
           </li>
         </ul>
       </div>
     </div>
   </div>
-
 </paper-header-panel>

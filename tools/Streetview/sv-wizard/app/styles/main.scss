@@ -61,39 +61,6 @@ paper-header-panel{
   color: #444;
 }
 
-.menu {
-
-  .menu-section {
-    margin-bottom: 20px;
-    h4 {
-      color: #666;
-    }
-    .menu-section-content {
-      margin-left: 20px;
-      color: #777;
-      h5 {
-        margin-top: 10px;
-        margin-left: -10px;
-        font-weight: bold;
-        color: #777;
-      }
-      ul {
-        margin-top: 10px;
-        margin-left: 10px;
-        li {
-          margin: 5px;
-          list-style: none;
-          font-size: 14px;
-          cursor: pointer;
-
-          &:hover {
-            color: #555;
-          }
-        }
-      }
-    }
-  }
-}
 
 paper-toolbar {
 

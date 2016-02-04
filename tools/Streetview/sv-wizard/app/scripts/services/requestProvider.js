@@ -19,7 +19,6 @@ svWizardApp.service('RequestProvider', ['localStorageService',
       }
       request.timestamp = Date.now() + '';
       requests_[request.timestamp] = request;
-      console.log(requests_);
       saveRequests_();
       updateArray_();
       return request;
