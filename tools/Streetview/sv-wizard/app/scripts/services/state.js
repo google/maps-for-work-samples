@@ -4,11 +4,10 @@ var angular = angular || {};
 var svWizardApp = angular.module('svWizardApp');
 
 svWizardApp.service('State', ['localStorageService', 'M',
-    function(localStorageService, M) {
+  function(localStorageService, M) {
     var CURRENT = 'current';
-
     var current_ = {};
-
+    
     init_();
 
     Object.defineProperty(this, 'current', {
@@ -18,13 +17,13 @@ svWizardApp.service('State', ['localStorageService', 'M',
         angular.isUndefined(current_.heading) ||
         angular.isUndefined(current_.fov) ||
         angular.isUndefined(current_.pitch)) {
-          return angular.copy(defaultRequest_);
+          current_ = angular.copy(defaultRequest_);
         }
         return current_;
       },
       set: function(request){
         current_ = request;
-        saveCurrentRequest_();
+        this.saveCurrentRequest();
       }
     });
 
@@ -32,7 +31,7 @@ svWizardApp.service('State', ['localStorageService', 'M',
      
     var defaultRequest_ = {
       timestamp: null,
-      name: 'La Giralda - Sevilla',
+      name: null,
       location: {lat: 37.3863, lng: -5.99205},
       size: {
         width: 640,
@@ -54,10 +53,10 @@ svWizardApp.service('State', ['localStorageService', 'M',
       }
     }
 
-    function saveCurrentRequest_(){
+    this.saveCurrentRequest = function(){
       var currentJson = angular.toJson(current_);
       localStorageService.set(CURRENT, currentJson);
     }
     
-    }
+  }
 ]);

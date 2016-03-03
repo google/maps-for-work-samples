@@ -20,9 +20,9 @@
     "ng-dialog": "likeastore/ngDialog#~0.5.6",
     "ng-polymer-elements": "GabiAxel/ng-polymer-elements#~0.3.0",
     "angular-local-storage": "~0.2.3",
-    "cryptojslib": "sytelus/CryptoJS#~3.1.2",
     "paper-fab": "PolymerElements/paper-fab#~1.1.1",
-    "paper-toolbar": "PolymerElements/paper-toolbar#~1.1.2"
+    "paper-toolbar": "PolymerElements/paper-toolbar#~1.1.2",
+    "jsSHA": "Caligatio/jsSHA#~2.0.2"
   },
   "devDependencies": {
     "chai": "~3.4.2",

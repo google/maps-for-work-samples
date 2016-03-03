@@ -29,7 +29,7 @@ module.exports = function (grunt) {
 
     // Project settings
     config: config,
-
+    
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       bower: {
@@ -121,12 +121,25 @@ module.exports = function (grunt) {
 
     // Make sure code styles are up to par and there are no obvious mistakes
     eslint: {
+      options: {
+        configFile: 'eslint.json'
+      },
       target: [
         'Gruntfile.js',
         '<%= config.app %>/scripts/{,*/}*.js',
         '!<%= config.app %>/scripts/vendor/*',
         'test/spec/{,*/}*.js'
       ]
+    },
+    
+    // Generate JSDoc
+    jsdoc : {
+      dist : {
+        src: ['<%= config.app %>/scripts/{,*/}*.js'],
+        options: {
+          destination: '<%= config.dist %>/doc'
+        }
+      }
     },
 
     // Mocha testing framework configuration options
@@ -233,11 +246,18 @@ module.exports = function (grunt) {
     // additional tasks can operate on them
     useminPrepare: {
       options: {
-        dest: '<%= config.dist %>'
+        dest: '<%= config.dist %>',
+        flow: {
+          /* Disabled uglify for JS because of
+          https://github.com/GabiAxel/ng-polymer-elements/pull/57 */
+          steps: { js: ['concat'], css: ['concat', 'cssmin'] }
+        }
       },
       html: '<%= config.app %>/index.html'
+      
     },
 
+      
     // Performs rewrites based on rev and the useminPrepare configuration
     usemin: {
       options: {
@@ -333,7 +353,7 @@ module.exports = function (grunt) {
           dest: '<%= config.dist %>',
           src: [
             '*.{ico,png,txt}',
-            'images/{,*/}*.webp',
+            'images/{,*/}*.*',
             '{,*/}*.html',
             'styles/fonts/{,*/}*.*'
           ]
@@ -378,7 +398,6 @@ module.exports = function (grunt) {
       dist: [
         'babel',
         'sass',
-        'imagemin',
         'svgmin'
       ]
     }
@@ -429,7 +448,6 @@ module.exports = function (grunt) {
     'postcss',
     'concat',
     'cssmin',
-    'uglify',
     'copy:dist',
     'modernizr',
     'filerev',
@@ -438,8 +456,8 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('default', [
-    'newer:eslint',
-    'test',
-    'build'
+    'eslint',
+    'build',
+    'jsdoc'
   ]);
 };

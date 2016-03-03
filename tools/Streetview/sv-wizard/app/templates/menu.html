@@ -7,7 +7,6 @@
       <iron-icon suffix icon="search"></paper-icon-button>
     </paper-input>
   </paper-toolbar>
-
   <div class="content fit layout vertical menu">
     <div class="menu-section" ng-show="!search || search.length == 0">
       <h4><iron-icon icon="settings"></iron-icon> Settings</h4>
@@ -27,16 +26,19 @@
         </paper-input-container>
       </div>
     </div>
-
     <div class="menu-section">
       <h4><iron-icon icon="folder"></iron-icon> Saved</h4>
       <div class="menu-section-content">
         <h5 ng-if="menu.provider.requests.length == 0">No saved requests!</h5>
         <ul ng-if="menu.provider.requests.length > 0">
-          <li ng-click="menu.openRequest(request)" 
+          <li
             ng-repeat="request in menu.provider.requests 
             | filter: search | orderBy: 'timestamp':true">
-            {{request.name}}
+            <iron-icon icon="close" class="delete"
+              confirm-action="menu.deleteRequest(request)"
+              confirm-action-message="{{menu.messages.confirmDelete}}">
+            </iron-icon>
+            <span ng-click="menu.openRequest(request)">{{request.name}}</span>
           </li>
         </ul>
       </div>

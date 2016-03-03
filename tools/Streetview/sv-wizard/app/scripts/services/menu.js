@@ -23,7 +23,7 @@ svWizard.services.Menu.prototype.open = function(){
 }
 
 svWizard.services.Menu.prototype.close = function(){
-  this.element.openDrawer();
+  this.element.closeDrawer();
 }
 
 angular.module('svWizardApp').provider('Menu', 

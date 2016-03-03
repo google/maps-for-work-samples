@@ -1,0 +1,11 @@
+{
+  "globals": {
+    "angular" : false,
+    "google" : false,
+    "jsSHA" : false
+  },
+  "indent": [2, 2],
+  "rules" : {
+    "no-unused-vars": [2, {"vars": "all", "args": "none"}]
+  }
+}

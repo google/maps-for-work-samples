@@ -8,7 +8,7 @@
 
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&v=3.23"></script>
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
@@ -19,10 +19,7 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" is="custom-style" href="styles/main.css">
-    <link rel="stylesheet" is="custom-style" href="styles/svPreview.css">
-    <link rel="stylesheet" is="custom-style" href="styles/menu.css">
-    <link rel="stylesheet" href="styles/ngDialog-theme-flat.css" />
+    <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
     <!-- build:js scripts/vendor/modernizr.js -->
     <script src="/bower_components/modernizr/modernizr.js"></script>
@@ -38,112 +35,25 @@
     <script src="/bower_components/ng-dialog/js/ngDialog.js"></script>
     <script src="/bower_components/ng-polymer-elements/ng-polymer-elements.js"></script>
     <script src="/bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
-    <script src="/bower_components/cryptojslib/components/aes-min.js"></script>
-    <script src="/bower_components/cryptojslib/components/aes.js"></script>
-    <script src="/bower_components/cryptojslib/components/cipher-core-min.js"></script>
-    <script src="/bower_components/cryptojslib/components/cipher-core.js"></script>
-    <script src="/bower_components/cryptojslib/components/core-min.js"></script>
-    <script src="/bower_components/cryptojslib/components/core.js"></script>
-    <script src="/bower_components/cryptojslib/components/enc-base64-min.js"></script>
-    <script src="/bower_components/cryptojslib/components/enc-base64.js"></script>
-    <script src="/bower_components/cryptojslib/components/enc-utf16-min.js"></script>
-    <script src="/bower_components/cryptojslib/components/enc-utf16.js"></script>
-    <script src="/bower_components/cryptojslib/components/evpkdf-min.js"></script>
-    <script src="/bower_components/cryptojslib/components/evpkdf.js"></script>
-    <script src="/bower_components/cryptojslib/components/format-hex-min.js"></script>
-    <script src="/bower_components/cryptojslib/components/format-hex.js"></script>
-    <script src="/bower_components/cryptojslib/components/hmac-min.js"></script>
-    <script src="/bower_components/cryptojslib/components/hmac.js"></script>
-    <script src="/bower_components/cryptojslib/components/lib-typedarrays-min.js"></script>
-    <script src="/bower_components/cryptojslib/components/lib-typedarrays.js"></script>
-    <script src="/bower_components/cryptojslib/components/md5-min.js"></script>
-    <script src="/bower_components/cryptojslib/components/md5.js"></script>
-    <script src="/bower_components/cryptojslib/components/mode-cfb-min.js"></script>
-    <script src="/bower_components/cryptojslib/components/mode-cfb.js"></script>
-    <script src="/bower_components/cryptojslib/components/mode-ctr-gladman-min.js"></script>
-    <script src="/bower_components/cryptojslib/components/mode-ctr-gladman.js"></script>
-    <script src="/bower_components/cryptojslib/components/mode-ctr-min.js"></script>
-    <script src="/bower_components/cryptojslib/components/mode-ctr.js"></script>
-    <script src="/bower_components/cryptojslib/components/mode-ecb-min.js"></script>
-    <script src="/bower_components/cryptojslib/components/mode-ecb.js"></script>
-    <script src="/bower_components/cryptojslib/components/mode-ofb-min.js"></script>
-    <script src="/bower_components/cryptojslib/components/mode-ofb.js"></script>
-    <script src="/bower_components/cryptojslib/components/pad-ansix923-min.js"></script>
-    <script src="/bower_components/cryptojslib/components/pad-ansix923.js"></script>
-    <script src="/bower_components/cryptojslib/components/pad-iso10126-min.js"></script>
-    <script src="/bower_components/cryptojslib/components/pad-iso10126.js"></script>
-    <script src="/bower_components/cryptojslib/components/pad-iso97971-min.js"></script>
-    <script src="/bower_components/cryptojslib/components/pad-iso97971.js"></script>
-    <script src="/bower_components/cryptojslib/components/pad-nopadding-min.js"></script>
-    <script src="/bower_components/cryptojslib/components/pad-nopadding.js"></script>
-    <script src="/bower_components/cryptojslib/components/pad-zeropadding-min.js"></script>
-    <script src="/bower_components/cryptojslib/components/pad-zeropadding.js"></script>
-    <script src="/bower_components/cryptojslib/components/pbkdf2-min.js"></script>
-    <script src="/bower_components/cryptojslib/components/pbkdf2.js"></script>
-    <script src="/bower_components/cryptojslib/components/rabbit-legacy-min.js"></script>
-    <script src="/bower_components/cryptojslib/components/rabbit-legacy.js"></script>
-    <script src="/bower_components/cryptojslib/components/rabbit-min.js"></script>
-    <script src="/bower_components/cryptojslib/components/rabbit.js"></script>
-    <script src="/bower_components/cryptojslib/components/rc4-min.js"></script>
-    <script src="/bower_components/cryptojslib/components/rc4.js"></script>
-    <script src="/bower_components/cryptojslib/components/ripemd160-min.js"></script>
-    <script src="/bower_components/cryptojslib/components/ripemd160.js"></script>
-    <script src="/bower_components/cryptojslib/components/sha1-min.js"></script>
-    <script src="/bower_components/cryptojslib/components/sha1.js"></script>
-    <script src="/bower_components/cryptojslib/components/sha224-min.js"></script>
-    <script src="/bower_components/cryptojslib/components/sha224.js"></script>
-    <script src="/bower_components/cryptojslib/components/sha256-min.js"></script>
-    <script src="/bower_components/cryptojslib/components/sha256.js"></script>
-    <script src="/bower_components/cryptojslib/components/sha3-min.js"></script>
-    <script src="/bower_components/cryptojslib/components/sha3.js"></script>
-    <script src="/bower_components/cryptojslib/components/sha384-min.js"></script>
-    <script src="/bower_components/cryptojslib/components/sha384.js"></script>
-    <script src="/bower_components/cryptojslib/components/sha512-min.js"></script>
-    <script src="/bower_components/cryptojslib/components/sha512.js"></script>
-    <script src="/bower_components/cryptojslib/components/tripledes-min.js"></script>
-    <script src="/bower_components/cryptojslib/components/tripledes.js"></script>
-    <script src="/bower_components/cryptojslib/components/x64-core-min.js"></script>
-    <script src="/bower_components/cryptojslib/components/x64-core.js"></script>
-    <script src="/bower_components/cryptojslib/rollups/aes.js"></script>
-    <script src="/bower_components/cryptojslib/rollups/hmac-md5.js"></script>
-    <script src="/bower_components/cryptojslib/rollups/hmac-ripemd160.js"></script>
-    <script src="/bower_components/cryptojslib/rollups/hmac-sha1.js"></script>
-    <script src="/bower_components/cryptojslib/rollups/hmac-sha224.js"></script>
-    <script src="/bower_components/cryptojslib/rollups/hmac-sha256.js"></script>
-    <script src="/bower_components/cryptojslib/rollups/hmac-sha3.js"></script>
-    <script src="/bower_components/cryptojslib/rollups/hmac-sha384.js"></script>
-    <script src="/bower_components/cryptojslib/rollups/hmac-sha512.js"></script>
-    <script src="/bower_components/cryptojslib/rollups/md5.js"></script>
-    <script src="/bower_components/cryptojslib/rollups/pbkdf2.js"></script>
-    <script src="/bower_components/cryptojslib/rollups/rabbit-legacy.js"></script>
-    <script src="/bower_components/cryptojslib/rollups/rabbit.js"></script>
-    <script src="/bower_components/cryptojslib/rollups/rc4.js"></script>
-    <script src="/bower_components/cryptojslib/rollups/ripemd160.js"></script>
-    <script src="/bower_components/cryptojslib/rollups/sha1.js"></script>
-    <script src="/bower_components/cryptojslib/rollups/sha224.js"></script>
-    <script src="/bower_components/cryptojslib/rollups/sha256.js"></script>
-    <script src="/bower_components/cryptojslib/rollups/sha3.js"></script>
-    <script src="/bower_components/cryptojslib/rollups/sha384.js"></script>
-    <script src="/bower_components/cryptojslib/rollups/sha512.js"></script>
-    <script src="/bower_components/cryptojslib/rollups/tripledes.js"></script>
+    <script src="/bower_components/jsSHA/src/sha.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
+    <link rel="import" href="bower_components/paper-styles/paper-styles.html">
+    <link rel="import" href="bower_components/iron-flex-layout/classes/iron-flex-layout.html">
+    <link rel="import" href="bower_components/iron-icons/iron-icons.html">
+    <link rel="import" href="bower_components/paper-header-panel/paper-header-panel.html">
+    <link rel="import" href="bower_components/paper-drawer-panel/paper-drawer-panel.html">
+    <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+    <link rel="import" href="bower_components/paper-input/paper-input.html">
+    <link rel="import" href="bower_components/paper-input/paper-textarea.html">
+    <link rel="import" href="bower_components/paper-radio-group/paper-radio-group.html">
+    <link rel="import" href="bower_components/paper-radio-button/paper-radio-button.html">
+    <link rel="import" href="bower_components/paper-button/paper-button.html">
+    <link rel="import" href="bower_components/paper-dialog/paper-dialog.html">
+    <link rel="import" href="bower_components/paper-fab/paper-fab.html">
+    <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
     <link rel="import" href="styles/custom-style.html">
-    <link rel="import" href="/bower_components/paper-styles/paper-styles.html">
-    <link rel="import" href="/bower_components/iron-flex-layout/classes/iron-flex-layout.html">
-    <link rel="import" href="/bower_components/iron-icons/iron-icons.html">
-    <link rel="import" href="/bower_components/paper-header-panel/paper-header-panel.html">
-    <link rel="import" href="/bower_components/paper-drawer-panel/paper-drawer-panel.html">
-    <link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
-    <link rel="import" href="/bower_components/paper-input/paper-input.html">
-    <link rel="import" href="/bower_components/paper-radio-group/paper-radio-group.html">
-    <link rel="import" href="/bower_components/paper-radio-button/paper-radio-button.html">
-    <link rel="import" href="/bower_components/paper-button/paper-button.html">
-    <link rel="import" href="/bower_components/paper-dialog/paper-dialog.html">
-    <link rel="import" href="/bower_components/paper-fab/paper-fab.html">
-    <link rel="import" href="/bower_components/paper-toolbar/paper-toolbar.html">
-
   </head>
   <body class="fullbleed layout horizontal">
     <!--[if lt IE 10]>
@@ -162,10 +72,9 @@
 
     </div>
     </paper-drawer-panel>
+    
         <!-- build:js scripts/main.js -->
           <script src="scripts/main.js"></script>
-          <script src="scripts/lib/utils.js"></script>
-          <script src="scripts/lib/generator.js"></script>
           <script src="scripts/models/authenticationMode.js"></script>
           <script src="scripts/services/generator.js"></script>
           <script src="scripts/services/utils.js"></script>
@@ -175,11 +84,14 @@
           <script src="scripts/services/state.js"></script>
           <script src="scripts/services/menu.js"></script>
           <script src="scripts/controllers/mainCtrl.js"></script>
-          <script src="scripts/controllers/generatedDialogCtrl.js"></script>
+          <script src="scripts/controllers/generatedUrlCtrl.js"></script>
+          <script src="scripts/controllers/saveCtrl.js"></script>
+          <script src="scripts/controllers/confirmCtrl.js"></script>
           <script src="scripts/controllers/menuCtrl.js"></script>
           <script src="scripts/directives/svPreview.js"></script>
           <script src="scripts/directives/mapPreview.js"></script>
           <script src="scripts/directives/autocomplete.js"></script>
+          <script src="scripts/directives/confirmAction.js"></script>
         <!-- endbuild -->
   </body>
 </html>
