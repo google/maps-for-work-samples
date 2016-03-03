@@ -45,13 +45,13 @@ import geomet.wkt
 import sqlparse
 
 # This is your CloudSQL instance
-_INSTANCE = 'project-wander-1:demo-sql'
+_INSTANCE = 'project-lightning-strike:dev-eu'
 _GEOMETRY_FIELD = 'geometry'
 # This is the host to connect to in the dev server.
 # This can be the IP address of your CloudSQL server, if you want to test that.
-_MYSQL_HOST = '127.0.0.1'
+_MYSQL_HOST = '173.194.81.135'
 _MYSQL_USER = 'root'
-_MYSQL_PASSWORD = 'changeme'
+_MYSQL_PASSWORD = 'koirakakka'
 
 # Note: We don't need to call run() since our application is embedded within
 # the App Engine WSGI application server.
