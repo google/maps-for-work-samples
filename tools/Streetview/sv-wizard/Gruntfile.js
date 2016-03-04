@@ -98,6 +98,7 @@ module.exports = function (grunt) {
       },
       dist: {
         options: {
+          port: 8080,
           background: false,
           server: '<%= config.dist %>'
         }

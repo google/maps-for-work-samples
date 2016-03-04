@@ -3,12 +3,12 @@
     <paper-input-container
       no-label-float="true">
       <input is="iron-input" type="text" placeholder="Search" 
-        ng-model="search"/>
+        ng-model="menu.search"/>
       <iron-icon suffix icon="search"></paper-icon-button>
     </paper-input>
   </paper-toolbar>
   <div class="content fit layout vertical menu">
-    <div class="menu-section" ng-show="!search || search.length == 0">
+    <div class="menu-section" ng-show="!menu.search || menu.search.length == 0">
       <h4><iron-icon icon="settings"></iron-icon> Settings</h4>
       <div class="menu-section-content">
         <h5>Authentication</h5>
@@ -33,7 +33,7 @@
         <ul ng-if="menu.provider.requests.length > 0">
           <li
             ng-repeat="request in menu.provider.requests 
-            | filter: search | orderBy: 'timestamp':true">
+            | filter: menu.search | orderBy: 'timestamp':true">
             <iron-icon icon="close" class="delete"
               confirm-action="menu.deleteRequest(request)"
               confirm-action-message="{{menu.messages.confirmDelete}}">
