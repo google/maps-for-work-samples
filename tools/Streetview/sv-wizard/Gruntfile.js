@@ -1,3 +1,6 @@
+// This file has been initially generated using
+// generator-webapp 1.1.0 
+// but has been modified to fit the build requirements on the project
 'use strict';
 
 module.exports = function (grunt) {
@@ -355,7 +358,8 @@ module.exports = function (grunt) {
           dot: true,
           dest: '<%= config.dist %>',
           src: [
-            // Copy bower components to fix polymer dependencies
+            // Copy bower components to fix polymer dependencies as they are
+            // not well integrated with the Grunt build tools.
             'bower_components/**/*.*'
           ]
         }]
