@@ -53,7 +53,3 @@ svWizard.models.LatLng;
  * @property {number} height height value in pixels
  */
 svWizard.models.Size;
-
-
-
-

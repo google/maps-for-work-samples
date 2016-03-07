@@ -48,3 +48,4 @@ svWizard.directives.confirmAction = (function(){
 
 angular.module('svWizardApp').directive( 'confirmAction', [ 'ngDialog',
   svWizard.directives.confirmAction]);
+  

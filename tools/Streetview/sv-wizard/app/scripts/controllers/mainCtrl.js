@@ -2,7 +2,6 @@ var svWizard = svWizard || {};
 svWizard.controllers = svWizard.controllers || {};
 
 svWizard.controllers.MainCtrl = (function(){
-  
   /**
    * MainCtrl controls the main view of the application, where the user can edit
    * the different parameters using the form and also using the Street View 

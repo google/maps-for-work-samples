@@ -53,4 +53,3 @@ svWizardApp.config(['localStorageServiceProvider', 'MenuProvider',
     MenuProvider.setMenuElement(angular.element('#drawer').get(0));
   }
 ]);
-

@@ -12,4 +12,3 @@ Once that's completed, you can execute grunt tasks to build and serve the applic
 * `grunt build`: Builds the tool in to the `dist/` folder. The build consists in concatenating and minifying the source code and copying it and its dependencies in to the target folder.
 * `grunt serve:dist`: Builds and serves the tool in port `8080`.
 * `grunt serve`: Serves the application under the `app/` folder, without building it, in port `8080`.
-

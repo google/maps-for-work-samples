@@ -32,3 +32,4 @@ svWizard.directives.mapAutocomplete = (function(){
 
 angular.module('svWizardApp').directive( 'mapAutocomplete', [ '$timeout', 
   svWizard.directives.mapAutocomplete]);
+  
