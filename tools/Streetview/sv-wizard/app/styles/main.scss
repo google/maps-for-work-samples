@@ -1,0 +1,181 @@
+// bower:scss
+// endbower
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+// Common style
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background: #fafafa;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  color: #333;
+  width: 100%;
+  height: 100%;
+}
+
+paper-header-panel{
+  box-shadow: 0px 0px 4px grey;
+  z-index: 1;
+  
+  .content {
+    height: 100%;
+    padding: 20px 15px;
+  }
+}
+
+.paper-header {
+  height: 60px;
+  font-size: 16px;
+  line-height: 60px;
+  padding: 0 10px;
+  color: white;
+  transition: height 0.2s;
+
+}
+
+/* Main style */
+.sv-parameters {
+  min-width: 400px;
+  width: 400px;
+  paper-toolbar {
+      paper-button[disabled] {
+      color: #ccc !important;
+      background: none;
+    }
+  }
+  .configuration {
+    font-size: 12px;
+    .alert {
+      color: #db4437;
+      padding: 10px;
+      margin-top: 10px;
+      border: 1px solid #db4437;
+      width: 100%;
+      max-width:100%;
+      background: none;
+      text-align: center;
+      display: block;
+      
+      &.warning {
+        color: #e2940c;
+        border-color:#e2940c;
+      }
+    }
+    .section {
+      padding-top: 5px;
+      padding-left: 5px;
+      .form {
+        padding-left: 5px;
+      }
+      h4 {
+        padding-top: 10px;
+        font-size: 14px;
+      }
+    }
+    .map-preview{
+      height: 200px;
+      display: block;
+      margin: 0px;
+      padding: 0px;
+      margin-right: 10px;
+      >div {
+        border: 1px solid #aaa;
+      }
+    }
+  }
+}
+
+/* SV Preview */
+.sv-preview-container {
+  background: #ddd;
+  padding: 10px;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  .sv-preview-panorama{
+    box-shadow: 0px 0px 5px grey;
+    .sv-unavailable{
+      width: 100%;
+      height: 100%;
+      background: url('../images/blur.png');
+      background-size: cover;
+      h4 {
+        color: white;
+        width: 100%;
+        text-align: center;
+        background: rgba(100,100,100,0.5);
+        padding: 20px;
+      }
+    }
+  }
+}
+
+/* Menus section style */
+.menu {
+  .menu-section {
+    margin-bottom: 20px;
+    h4 {
+      color: #666;
+    }
+    .menu-section-content {
+      margin-left: 20px;
+      color: #777;
+      h5 {
+        margin-top: 10px;
+        margin-left: -10px;
+        font-weight: bold;
+        color: #777;
+      }
+      ul {
+        margin-top: 10px;
+        margin-left: 0;
+        li {
+          list-style: none;
+          font-size: 14px;
+          cursor: pointer;
+          margin-left: -15px;
+          iron-icon {
+            opacity: 0;
+            width: 20px;
+            color: #555;
+            &:hover {
+              color: #db4437;
+            }
+          }
+          &:hover {
+            color: #555;
+            iron-icon {
+              opacity: 1;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/*ngDialig theme*/
+
+.ngdialog.ngdialog-theme-custom {
+	padding-top: 125px;
+	padding-bottom: 125px;
+	
+	.ngdialog-overlay {
+	  background: rgba(0,0,0,.5);
+  };
+  
+  .ngdialog-content {
+  	background: rgba(255,255,255,.9);
+  	padding: 1.8em 2em;
+  	border-radius: 0;
+  	border-radius: 0;
+    width: 50%;
+  }
+}

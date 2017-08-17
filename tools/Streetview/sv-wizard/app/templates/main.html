@@ -1,0 +1,187 @@
+<paper-header-panel mode="standard" class="sv-parameters">
+  <paper-toolbar class="medium-tall main">
+    <paper-icon-button icon="menu" class="paper-header" 
+      ng-click="main.menu.open()">
+    </paper-icon-button>
+    <div class="title">
+      {{main.state.current.name || "New request"}}
+    </div>
+    <!-- Actions -->
+    <div class="middle toolbar">
+      <paper-button confirm-action="main.newRequest()" 
+        confirm-action-message="{{main.messages.confirmNew}}">
+        <iron-icon icon="note-add"></iron-icon> New
+      </paper-button>
+      <paper-button ng-click="main.save()">
+        <iron-icon icon="save"></iron-icon> Save...
+      </paper-button>
+      <paper-button ng-click="main.generate()" 
+        ng-disabled="main.authenticationMissing || !form.$valid">
+        <iron-icon icon="code"></iron-icon>  Generate
+      </paper-button>
+    </div>
+  </paper-toolbar>
+  
+  <form class="content layout vertical justified" name="form">
+    <!-- Request porperties sections-->
+    <div class="configuration">
+      <div ng-if="main.authenticationMissing || !form.$valid"
+        class="alert">
+        You have errors in the parameters. Please fix them before generating
+        the request
+      </div>
+      <!--Request location section -->
+      <div class="section">
+        <h4>Location</h4>
+        <div class="form">
+          <paper-input-container no-label-float="true" class="flex small">
+            <input is="iron-input" 
+              map-autocomplete="main.addressSelected(address)">
+            </input>
+          </paper-input-container>
+          <map-preview class="map-preview flex" panorama="main.panorama">
+          </map-preview >
+        </div>
+      </div>
+      
+      <!-- Request parameters section -->
+      <div class="section">
+        <h4>Request Parameters</h4>
+        <div class="form">
+          <!-- Size -->
+          <div ng-if="!form.width.$valid || !form.height.$valid"
+            class="alert">
+              <span ng-if="!main.isFree()"> 
+                Maximum size is 2048x2048 for Premium Plan
+              </span>
+              <span ng-if="main.isFree()"> 
+                Maximum size is 640x640 for Free Plan
+              </span>
+          </div>
+          <div ng-if="form.width.$valid && main.isApiKey() && 
+            (main.state.current.size.width > 640 
+              || main.state.current.size.height > 640)" 
+              class="alert warning">
+              If you don't have a Premium Plan license, note that the
+              maximum size for Standard Plan is 640x640 rather than
+              2048x2048
+          </div>
+          <div class="layout horizontal">
+            <!-- Width -->
+            <paper-input-container always-float-label="true" class="small"
+              ng-attr-invalid="{{!form.width.$valid || undefined}}">
+              <label>width:</label>
+              <input is="iron-input" type="number" name="width" 
+                ng-min="0" ng-max="{{main.isFree() ? 640 : 2048}}"
+                ng-model="main.state.current.size.width"
+                ng-model-options="{ updateOn: 'blur mouseup',
+                  allowInvalid: true}">
+               <div suffix>px</div>
+            </paper-input-container>
+            <!-- Height -->
+            <paper-input-container always-float-label="true" class="small" 
+            ng-attr-invalid="{{!form.height.$valid || undefined}}">
+              <label>height:</label>
+              <input is="iron-input" type="number" name="height"
+                ng-min="0" ng-max="{{main.isFree() ? 640 : 2048}}"
+                ng-model="main.state.current.size.height"
+                ng-model-options="{ updateOn: 'blur mouseup',
+                  allowInvalid: true}">
+               <div suffix>px</div>
+            </paper-input-container>
+          </div>
+          <!--Location-->
+          <div class="layout horizontal">
+            <!--Latitude-->
+            <paper-input-container always-float-label="true" class="small">
+              <label>latitude:</label>
+              <input is="iron-input" type="number" step="0.001"
+                max="85" min="-85"
+                ng-model="main.state.current.location.lat"
+                ng-model-options="{ updateOn: 'blur mouseup' }">
+            </paper-input-container>
+            <!--Longitude-->
+            <paper-input-container always-float-label="true"class="small">
+              <label>longitude:</label>
+              <input is="iron-input" type="number" step="0.001" 
+                max="180" min="-180"
+                ng-model="main.state.current.location.lng"
+                ng-model-options="{ updateOn: 'blur mouseup' }">
+            </paper-input-container>
+          </div>
+          <!--Heading -->
+          <div class="layout horizontal">
+            <paper-input-container always-float-label="true" class="small">
+              <label>heading:</label>
+              <input is="iron-input" type="number" min="0" max="360"
+                step="0.5" ng-model="main.state.current.heading"
+                ng-model-options="{ updateOn: 'blur mouseup' }">
+            </paper-input-container>
+          </div>
+          <!--Pitch-->
+          <div class="layout horizontal">
+            <paper-input-container always-float-label="true" class="small">
+              <label>pitch:</label>
+              <input is="iron-input" type="number" min="-90" max="90"
+                step="0.5" ng-model="main.state.current.pitch"
+                ng-model-options="{ updateOn: 'blur mouseup' }">
+            </paper-input-container>
+          </div>
+          <!--Fov-->
+          <div class="layout horizontal">
+            <paper-input-container always-float-label="true" class="small">
+              <label>fov:</label>
+              <input is="iron-input" type="number" max="120" min="5.6"
+                step="0.5" ng-model="main.state.current.fov"
+                ng-model-options="{ updateOn: 'blur mouseup' }">
+            </paper-input-container>
+          </div>
+        </div>
+      </div>
+      <!--Authentication section-->
+      <div class="section">
+        <h4>Authentication</h4>
+          <div class="form ">
+            <div ng-if="main.authenticationMissing"
+            class="alert">
+              <span ng-if="main.isForWork()"> 
+                You have to provide your client id and crypto key in the
+                <a href="#" ng-click="main.menu.open()">settings</a>
+              </span>
+              <span ng-if="!main.isForWork()"> 
+                You have to provide your API key in the 
+                <a href="#" ng-click="main.menu.open()">settings</a>
+              </span>
+            </div>
+          
+            <paper-radio-group ng-model="main.state.current.authenticationMode"
+              class="layout vertical">
+              <paper-radio-button name="{{main.AuthenticationMode.NONE}}">
+                None
+              </paper-radio-button>
+              <paper-radio-button name="{{main.AuthenticationMode.API_KEY}}">
+                API key
+              </paper-radio-button>
+              <paper-radio-button 
+                name="{{main.AuthenticationMode.CLIENT_AND_CRYPTO}}">
+                Client ID + Crypto key
+              </paper-radio-button>
+            </paper-radio-group>
+          </div>
+      </div>
+    </div>
+    <!--End of form-->
+  </form>
+</paper-header-panel>
+ 
+<div class="sv-preview-container layout horizontal vertical center 
+center-justified">
+ <sv-preview style="width:100%;height:100%" class="sv-preview-panorama"
+  panorama="main.panorama"
+  location="main.state.current.location"
+  fov="main.state.current.fov"
+  heading="main.state.current.heading"
+  pitch="main.state.current.pitch"
+  size="main.state.current.size"/>
+</div>
+  

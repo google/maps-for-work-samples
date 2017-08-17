@@ -1,0 +1,95 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <title>SV Wizard</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&v=3.23"></script>
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="/bower_components/ng-dialog/css/ngDialog.css" />
+    <link rel="stylesheet" href="/bower_components/ng-dialog/css/ngDialog-theme-default.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+    <!-- build:js scripts/vendor/modernizr.js -->
+    <script src="/bower_components/modernizr/modernizr.js"></script>
+    <!-- endbuild -->
+
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/webcomponentsjs/webcomponents.js"></script>
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/web-animations-js/web-animations.min.js"></script>
+    <script src="/bower_components/ng-dialog/js/ngDialog.js"></script>
+    <script src="/bower_components/ng-polymer-elements/ng-polymer-elements.js"></script>
+    <script src="/bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+    <script src="/bower_components/jsSHA/src/sha.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <link rel="import" href="bower_components/paper-styles/paper-styles.html">
+    <link rel="import" href="bower_components/iron-flex-layout/classes/iron-flex-layout.html">
+    <link rel="import" href="bower_components/iron-icons/iron-icons.html">
+    <link rel="import" href="bower_components/paper-header-panel/paper-header-panel.html">
+    <link rel="import" href="bower_components/paper-drawer-panel/paper-drawer-panel.html">
+    <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+    <link rel="import" href="bower_components/paper-input/paper-input.html">
+    <link rel="import" href="bower_components/paper-input/paper-textarea.html">
+    <link rel="import" href="bower_components/paper-radio-group/paper-radio-group.html">
+    <link rel="import" href="bower_components/paper-radio-button/paper-radio-button.html">
+    <link rel="import" href="bower_components/paper-button/paper-button.html">
+    <link rel="import" href="bower_components/paper-dialog/paper-dialog.html">
+    <link rel="import" href="bower_components/paper-fab/paper-fab.html">
+    <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
+    <link rel="import" href="styles/custom-style.html">
+  </head>
+  <body class="fullbleed layout horizontal">
+    <!--[if lt IE 10]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. 
+      Please <a href="http://browsehappy.com/">upgrade your browser</a> to 
+      improve your experience.</p>
+    <![endif]-->
+    <paper-drawer-panel force-narrow="true" ng-app="svWizardApp" id="drawer">
+      <!-- Settings menu -->
+      <div drawer ng-include="'templates/menu.html'"
+        ng-controller="MenuCtrl as menu">
+      </div>
+      <!-- RequestView -->
+      <div main class="layout horizontal" ng-include="'templates/main.html'"
+        ng-controller="MainCtrl as main">
+
+    </div>
+    </paper-drawer-panel>
+    
+        <!-- build:js scripts/main.js -->
+          <script src="scripts/main.js"></script>
+          <script src="scripts/models/models.js"></script>
+          <script src="scripts/services/utils.js"></script>
+          <script src="scripts/services/settings.js"></script>
+          <script src="scripts/services/requestProvider.js"></script>
+          <script src="scripts/services/state.js"></script>
+          <script src="scripts/services/menu.js"></script>
+          <script src="scripts/controllers/mainCtrl.js"></script>
+          <script src="scripts/controllers/generatedUrlCtrl.js"></script>
+          <script src="scripts/controllers/saveCtrl.js"></script>
+          <script src="scripts/controllers/confirmCtrl.js"></script>
+          <script src="scripts/controllers/menuCtrl.js"></script>
+          <script src="scripts/directives/svPreview.js"></script>
+          <script src="scripts/directives/mapPreview.js"></script>
+          <script src="scripts/directives/autocomplete.js"></script>
+          <script src="scripts/directives/confirmAction.js"></script>
+        <!-- endbuild -->
+  </body>
+</html>

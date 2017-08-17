@@ -1,0 +1,15 @@
+<div class="modal">
+  <h4>Save request</h4>
+  <paper-input ng-model="save.request.name" label="Request name">
+  </paper-input>
+  
+  <div class="controls flex horizontal layout end-justified">
+    <paper-button ng-click="save.saveRequestAs()">
+      Save as
+    </paper-button>
+    <paper-button ng-if="save.request.id != null" 
+      ng-click="save.saveRequest()">
+      Save
+    </paper-button>
+  </div>
+</div>
